@@ -20,7 +20,7 @@
 #include "scrapers/GamesDBScraper.h"
 #include "scrapers/TheArchiveScraper.h"
 
-GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MENU"), mVersion(window)
+GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "ERPT RETRO"), mVersion(window)
 {
 	// MAIN MENU
 
@@ -63,6 +63,24 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 			row.addElement(scrape_now, true);
 			row.addElement(bracket, false);
 			s->addRow(row);
+
+			mWindow->pushGui(s);
+	});
+
+	addEntry("ROMSYNC", 0x777777FF, true, 
+		[this] {
+			//auto s = new GuiSettings(mWindow, "ROMSYNC");
+			
+			Window* window = mWindow;
+
+			//ComponentListRow row;
+
+			//row.elements.clear();
+			//row.makeAcceptInputHandler([window] {
+			auto s = new GuiMsgBox(window, "SYNC LOCAL ROMS WITH DROPBOX?", "YES", nullptr, "NO", nullptr);
+			//});
+			//row.addElement(std::make_shared<TextComponent>(window, "QUIT EMULATIONSTATION", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+			//s->addRow(row);
 
 			mWindow->pushGui(s);
 	});
